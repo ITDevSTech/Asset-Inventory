@@ -27,7 +27,15 @@ function accountsApp() {
         if (window.lucide) lucide.createIcons();
       });
     },
-
+// Current date ng PC
+        get currentDate() {
+            const now = new Date();
+            return now.toLocaleDateString('en-PH', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        },
     async loadUsers() {
       const { data, error } = await this.db
         .from('users_duplicate')
@@ -183,4 +191,5 @@ function accountsApp() {
     
   };
 }
+
 
