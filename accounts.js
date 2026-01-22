@@ -38,7 +38,7 @@ function accountsApp() {
         },
     async loadUsers() {
       const { data, error } = await this.db
-        .from('users_duplicate')
+        .from('users')
         .select('*')
         .order('created_at', { ascending: false });
 
@@ -123,7 +123,7 @@ function accountsApp() {
 
         const hashedPassword = await hashPassword(this.password);
 
-        const { error } = await this.db.from('users_duplicate').insert([{
+        const { error } = await this.db.from('users').insert([{
           username: this.currentUser.username,
           email: this.currentUser.email,
           role: this.currentUser.role,
@@ -154,7 +154,7 @@ function accountsApp() {
 
         if (hashedPassword) updateData.password = hashedPassword;
 
-        const { error } = await this.db.from('users_duplicate')
+        const { error } = await this.db.from('users')
           .update(updateData)
           .eq('id', this.currentUser.id);
 
@@ -177,7 +177,7 @@ function accountsApp() {
     async deleteUser(id) {
       if (!confirm('Are you sure you want to delete this user?')) return;
 
-      const { error } = await this.db.from('users_duplicate')
+      const { error } = await this.db.from('users')
         .delete()
         .eq('id', id);
 
@@ -191,5 +191,4 @@ function accountsApp() {
     
   };
 }
-
 
