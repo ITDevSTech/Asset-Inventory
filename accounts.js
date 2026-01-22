@@ -38,7 +38,7 @@ function accountsApp() {
 
     async loadUsers() {
       const { data, error } = await this.db
-        .from('users')
+        .from('users_duplicate')
         .select('*')
         .order('created_at', { ascending: false });
 
@@ -167,7 +167,7 @@ function accountsApp() {
         }
 
         const { error } = await this.db
-          .from('users')
+          .from('users_duplicate')
           .update(updateData)
           .eq('id', this.currentUser.id);
 
@@ -204,3 +204,4 @@ function accountsApp() {
     }
   };
 }
+
